@@ -5,7 +5,7 @@ and the browser. It was originally written as an internal component for [Seed](h
 but it had no other dependancies and seemed fit for use in the browser.
 
 
-### Installation
+## Installation
 
 ##### Node.js
 
@@ -23,11 +23,11 @@ Download the package and include either the normal or minimized build in your HT
 
 The browser build is fully AMD and CommonJS compatible and should work on all browser.
 
-#### Where to Get Help
+## Where to Get Help
 
 Please post issues to [GitHub Issues](https://github.com/logicalparadox/filtr/issues).
 
-### Features
+## Features
 
 ##### Expansive Query Language
 
@@ -47,17 +47,17 @@ var query = filtr({ $gt: 15, $lt: 25 })
 // results == [ 17, 19 ];
 ```
 
-##### Test Options
+#### Test Options
 
 Testing also supports a number of options passed in as the second argument.
 
 * type: input modifier
-** `set`: (default) assert that the data provided is an array. test each item.
-** `single`: assert that the data provided is a single item. return boolean.
+* * `set`: (default) assert that the data provided is an array. test each item.
+* * `single`: assert that the data provided is a single item. return boolean.
 * spec: output modifer
-** `subset`: (default) return an array containing a subset of matched items
-** `boolean`: return an array of the original length with each item being a boolean when object passed or failed.
-** `index`: return an array of numbers matching the index of passed object in the original array
+* * `subset`: (default) return an array containing a subset of matched items
+* * `boolean`: return an array of the original length with each item being a boolean when object passed or failed.
+* * `index`: return an array of numbers matching the index of passed object in the original array
 
 ```js
 var query = filtr({ $gt: 15, $lt: 25 })
@@ -65,7 +65,7 @@ var query = filtr({ $gt: 15, $lt: 25 })
 // results == [ false, false, true, true, false ];
 ```
 
-##### Using Paths
+#### Using Paths
 
 Filtr also supports using paths for deep matching within a javascript object.
 
@@ -100,7 +100,7 @@ var hello = filtr.getPathValue('d[0].e', dataComplex[1]);
 // hello == 'universe'
 ```
 
-### Tests
+## Tests
 
 Tests are written in the BDD styles for the [Mocha]() test runner using the
 `should` assertion interface from [Chai](http://chaijs.com). Running tests is simple:

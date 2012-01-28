@@ -1,6 +1,6 @@
 {
   "author": "Jake Luer <jake@alogicalparadox.com>",
-  "name": "fltr",
+  "name": "filtr",
   "description": "Array filtering for node.js and the browser inspired by MongoDB.",
   "version": "0.0.1",
   "repository": {

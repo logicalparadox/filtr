@@ -1,0 +1,23 @@
+{
+  "author": "Jake Luer <jake@alogicalparadox.com>",
+  "name": "fltr",
+  "description": "Array filtering for node.js and the browser inspired by MongoDB.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/logicalparadox/fltr.git"
+  },
+  "main": "./index",
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": ">=0.4.8"
+  },
+  "dependencies": {},
+  "devDependencies": {
+      "mocha": "*"
+    , "chai": "*"
+  },
+  "optionalDependencies": {}
+}

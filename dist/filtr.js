@@ -71,7 +71,7 @@ function Filtr (query) {
  * Version number
  */
 
-Filtr.version = '0.1.1';
+Filtr.version = '0.1.2';
 
 /**
  * ## .comparators
@@ -189,7 +189,7 @@ Filtr.comparators = {
 
 Filtr.getPathValue = function (path, obj) {
   var parsed = parsePath(path);
-  return getPathValue(parsed, path);
+  return getPathValue(parsed, obj);
 }
 
 /*!

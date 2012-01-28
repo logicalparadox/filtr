@@ -22,10 +22,6 @@ Download the package and include either the normal or minimized build in your HT
 
 The browser build is fully AMD and CommonJS compatible and should work on all browser.
 
-## Where to Get Help
-
-Please post issues to [GitHub Issues](https://github.com/logicalparadox/filtr/issues).
-
 ## Features
 
 Filtr is still in early development so expect this list to grow.
@@ -102,6 +98,10 @@ A helper is also available that returns the value in a nested object given a str
 var hello = filtr.getPathValue('d[0].e', dataComplex[1]);
 // hello == 'universe'
 ```
+
+## Where to Get Help
+
+Please post issues to [GitHub Issues](https://github.com/logicalparadox/filtr/issues).
 
 ## Tests
 

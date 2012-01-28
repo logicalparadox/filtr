@@ -5,15 +5,15 @@ and the browser. It was originally written as an internal component for [Seed](h
 but it had no other dependancies and seemed fit for use in the browser.
 
 
-## Installation
+### Installation
 
-### Node.js
+#### Node.js
 
 Filtr is available on npm.
 
     npm install filtr
 
-### Browser
+#### Browser
 
 A browser build is available in the repository's `dist` folder.
 Download the package and include either the normal or minimized build in your HTML header.
@@ -23,27 +23,27 @@ Download the package and include either the normal or minimized build in your HT
 
 The browser build is fully AMD and CommonJS compatible and should work on all browser.
 
-## Projects Using Filtr
+### Projects Using Filtr
 
 * [Seed](https://github.com/qualiancy/seed)
 
-## Where to Get Help
+#### Where to Get Help
 
 Please post issues to [GitHub Issues](https://github.com/logicalparadox/filtr/issues).
 
-## Features
+### Features
 
-### Expansive Query Language
+#### Expansive Query Language
 
 * Comparators: `$gt`, `$gte`, `$lt`, `$lte`, `$all`, `$exists`, `$mod`, `$eq`, `$ne`, `$in`, `$nin`, `$size`
 * Traversables: `$or`, `$nor`, `$and`
 
-### Data Helpers
+#### Data Helpers
 
 * `filtr.getPathValue` returns the nested value in an object given a string path
 * `filtr.comparators` are available directly for quick value testing
 
-## Usage
+### Usage
 
 ```js
 var query = filtr({ $gt: 15, $lt: 25 })
@@ -51,7 +51,7 @@ var query = filtr({ $gt: 15, $lt: 25 })
 // results == [ 17, 19 ];
 ```
 
-### Test Options
+#### Test Options
 
 Testing also supports a number of options passed in as the second argument.
 
@@ -69,7 +69,7 @@ var query = filtr({ $gt: 15, $lt: 25 })
 // results == [ false, false, true, true, false ];
 ```
 
-### Using Paths
+#### Using Paths
 
 Filtr also supports using paths for deep matching within a javascript object.
 
@@ -104,7 +104,7 @@ var hello = filtr.getPathValue('d[0].e', dataComplex[1]);
 // hello == 'universe'
 ```
 
-## Tests
+### Tests
 
 Tests are written in the BDD styles for the [Mocha]() test runner using the
 `should` assertion interface from [Chai](http://chaijs.com). Running tests is simple:
@@ -114,11 +114,12 @@ Tests are written in the BDD styles for the [Mocha]() test runner using the
 A browser suite is also available at `test/browser/index.js`. The same test definitions are 
 used in both contexts.
 
-## Contributing
+### Contributing
 
-Interested in contributing? Fork to get started. Contact [@logicalparadox](http://github.com/logicalparadox) if you are interested in being regular contributor.
+Interested in contributing? Fork to get started. Contact [@logicalparadox](http://github.com/logicalparadox) 
+if you are interested in being regular contributor.
 
-### Contibutors 
+#### Contibutors 
 
 * Jake Luer ([Github: @logicalparadox](http://github.com/logicalparadox)) ([Twitter: @jakeluer](http://twitter.com/jakeluer)) ([Website](http://alogicalparadox.com))
 

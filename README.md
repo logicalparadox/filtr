@@ -4,16 +4,15 @@ Filter javascript arrays using a MongoDB style syntax and is available for node.
 and the browser. It was originally written as an internal component for [Seed](https://github.com/qualiancy/seed),
 but it had no other dependancies and seemed fit for use in the browser.
 
-
 ## Installation
 
-##### Node.js
+### Node.js
 
 Filtr is available on npm.
 
     npm install filtr
 
-##### Browser
+### Browser
 
 A browser build is available in the repository's `dist` folder.
 Download the package and include either the normal or minimized build in your HTML header.
@@ -28,6 +27,8 @@ The browser build is fully AMD and CommonJS compatible and should work on all br
 Please post issues to [GitHub Issues](https://github.com/logicalparadox/filtr/issues).
 
 ## Features
+
+Filtr is still in early development so expect this list to grow.
 
 ##### Expansive Query Language
 
@@ -47,17 +48,20 @@ var query = filtr({ $gt: 15, $lt: 25 })
 // results == [ 17, 19 ];
 ```
 
-#### Test Options
+#### Test options provide different output 
 
 Testing also supports a number of options passed in as the second argument.
 
-* type: input modifier
-* * `set`: (default) assert that the data provided is an array. test each item.
-* * `single`: assert that the data provided is a single item. return boolean.
-* spec: output modifer
-* * `subset`: (default) return an array containing a subset of matched items
-* * `boolean`: return an array of the original length with each item being a boolean when object passed or failed.
-* * `index`: return an array of numbers matching the index of passed object in the original array
+* *spec*: output modifer
+  * _subset_: (default) return an array containing a subset of matched items
+  * _boolean_: return an array of the original length with each item being a boolean when object passed or failed.
+  * _index_: return an array of numbers matching the index of passed object in the original array
+* *type*: input modifier
+  * _set_: (default) assert that the data provided is an array. test each item.
+  * _single_: assert that the data provided is a single item. return boolean.
+
+Using the `spec` output modifier is an easy way to handle post processing of result sets
+without having to match up a subset.
 
 ```js
 var query = filtr({ $gt: 15, $lt: 25 })
@@ -65,11 +69,10 @@ var query = filtr({ $gt: 15, $lt: 25 })
 // results == [ false, false, true, true, false ];
 ```
 
-#### Using Paths
+#### Using paths for deep matching
 
-Filtr also supports using paths for deep matching within a javascript object.
-
-Given the following items, and sample queries.
+Filtr also supports using paths for deep matching within a javascript object. Given the 
+following items, and sample queries.
 
 ```js
 var dataComplex = [

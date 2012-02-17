@@ -33,6 +33,29 @@ describe('Query', function () {
     Q.test([0,1,2], { type: 'single' }).should.be.true;
   });
 
+  describe('comparator assumptions', function () {
+    it('should assume $eq if no comparator provided - string', function () {
+      var query = { 'hello': 'universe' }
+        , Q = filtr(query);
+      Q.stack.should.have.length(1);
+      Q.test({ hello: 'universe' }, { type: 'single' }).should.be.true;
+    });
+
+    it('should assume $eq if no comparator provided - number', function () {
+      var query = { 'hello': 42 }
+        , Q = filtr(query);
+      Q.stack.should.have.length(1);
+      Q.test({ hello: 42 }, { type: 'single' }).should.be.true;
+    });
+
+    it('should assume $eq if no comparator provided - boolean', function () {
+      var query = { 'hello': true }
+        , Q = filtr(query);
+      Q.stack.should.have.length(1);
+      Q.test({ hello: true }, { type: 'single' }).should.be.true;
+    });
+  });
+
   // TODO: More complicated nesting
   // TODO: All nesting options.
 

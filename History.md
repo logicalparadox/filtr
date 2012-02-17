@@ -1,4 +1,10 @@
 
+0.1.3 / 2012-02-17 
+==================
+
+  * test for getPathValue
+  * if no comparator provided with path lookup, assumes $eq
+
 0.1.2 / 2012-01-28 
 ==================
 

@@ -71,7 +71,7 @@ function Filtr (query) {
  * Version number
  */
 
-Filtr.version = '0.1.2';
+Filtr.version = '0.1.3';
 
 /**
  * ## .comparators
@@ -328,8 +328,15 @@ function parseQuery (query) {
     if (cmd[0] == '$') {
       qry.test = parseFilter(query);
     } else {
-      qry.test = parseFilter(params);
-      qry.path = parsePath(cmd);
+      if ('string' == typeof params
+      || 'number' == typeof params
+      || 'boolean' == typeof params) {
+        qry.test = parseFilter({ $eq: params });
+        qry.path = parsePath(cmd);
+      } else {
+        qry.test = parseFilter(params);
+        qry.path = parsePath(cmd);
+      }
     }
     stack.push(qry);
   }

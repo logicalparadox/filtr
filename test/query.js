@@ -33,6 +33,12 @@ describe('Query', function () {
     Q.test([0,1,2], { type: 'single' }).should.be.true;
   });
 
+  it('should provide the getPathValue helper', function () {
+    var obj = { hello: { universe: 'world' }}
+      , val = filtr.getPathValue('hello.universe', obj);
+    val.should.equal('world');
+  });
+
   describe('comparator assumptions', function () {
     it('should assume $eq if no comparator provided - string', function () {
       var query = { 'hello': 'universe' }

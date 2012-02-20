@@ -39,6 +39,46 @@ describe('Query', function () {
     val.should.equal('world');
   });
 
+  describe('setPathValue', function () {
+    it('should allow value to be set in simple object', function () {
+      var obj = {};
+      filtr.setPathValue('hello', 'universe', obj);
+      obj.should.eql({ hello: 'universe' });
+    });
+
+    it('should allow value to be REset in simple object', function () {
+      var obj = { hello: 'world' };
+      filtr.setPathValue('hello', 'universe', obj);
+      obj.should.eql({ hello: 'universe' });
+    });
+
+    it('should allow value to be set in complex object', function () {
+      var obj = { hello: { }};
+      filtr.setPathValue('hello.universe', 42, obj);
+      obj.should.eql({ hello: { universe: 42 }});
+    });
+
+    it('should allow value to be REset in complex object', function () {
+      var obj = { hello: { universe: 100 }};
+      filtr.setPathValue('hello.universe', 42, obj);
+      obj.should.eql({ hello: { universe: 42 }});
+    });
+
+    it('should allow for value to be set in array', function () {
+      var obj = { hello: [] };
+      filtr.setPathValue('hello[0]', 1, obj);
+      obj.should.eql({ hello: [1] });
+      filtr.setPathValue('hello[2]', 3, obj);
+      obj.should.eql({ hello: [1 , , 3] });
+    });
+
+    it('should allow for value to be REset in array', function () {
+      var obj = { hello: [ 1, 2, 4 ] };
+      filtr.setPathValue('hello[2]', 3, obj);
+      obj.should.eql({ hello: [ 1, 2, 3 ] });
+    });
+  });
+
   describe('comparator assumptions', function () {
     it('should assume $eq if no comparator provided - string', function () {
       var query = { 'hello': 'universe' }

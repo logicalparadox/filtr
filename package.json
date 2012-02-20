@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/logicalparadox/fltr.git"
+    "url": "git://github.com/logicalparadox/filtr.git"
   },
   "main": "./index",
   "scripts": {

@@ -34,6 +34,7 @@ Filtr is still in early development so expect this list to grow.
 ##### Data Helpers
 
 * `filtr.getPathValue` returns the nested value in an object given a string path
+* `filtr.setPathValue` sets the nested value in an object given a string path
 * `filtr.comparators` are available directly for quick value testing
 
 ### Usage
@@ -48,11 +49,11 @@ var query = filtr({ $gt: 15, $lt: 25 })
 
 Testing also supports a number of options passed in as the second argument.
 
-* *spec*: output modifer
+* **spec**: output modifer
   * _subset_: (default) return an array containing a subset of matched items
   * _boolean_: return an array of the original length with each item being a boolean when object passed or failed.
   * _index_: return an array of numbers matching the index of passed object in the original array
-* *type*: input modifier
+* **type**: input modifier
   * _set_: (default) assert that the data provided is an array. test each item.
   * _single_: assert that the data provided is a single item. return boolean.
 

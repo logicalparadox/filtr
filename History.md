@@ -1,4 +1,11 @@
 
+0.2.0 / 2012-02-20 
+==================
+
+  * browser build for testing
+  * test for setPathValue
+  * setPathValue + public helper
+
 0.1.3 / 2012-02-17 
 ==================
 

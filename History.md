@@ -1,4 +1,12 @@
 
+0.2.1 / 2012-02-25 
+==================
+
+  * support for subqueries
+  * Merge pull request #1 from benatkin/patch-1
+  * README has new features
+  * fix repository url
+
 0.2.0 / 2012-02-20 
 ==================
 

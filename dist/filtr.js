@@ -71,7 +71,7 @@ function Filtr (query) {
  * Version number
  */
 
-Filtr.version = '0.2.0';
+Filtr.version = '0.2.1';
 
 /**
  * ## .comparators
@@ -359,17 +359,10 @@ Filtr.prototype.test = function (data, opts) {
       }
     , options = _defaults(opts || {}, defaults)
     , res = (options.type == 'single') ? false : []
-    , filter
-    , el;
   if (options.type == 'single') data = [ data ];
   for (var di = 0, dl = data.length; di < dl; di++) {
     var datum = data[di]
-      , pass = true;
-    for (var si = 0, sl = this.stack.length; si < sl; si++) {
-      filter = this.stack[si];
-      el = (filter.path) ? getPathValue(filter.path, datum) : datum;
-      if (!testFilter(el, filter.test)) pass = false;
-    }
+      , pass = testFilter(datum, this.stack);
     if (options.type == 'single') {
       res = pass;
     } else {
@@ -440,9 +433,11 @@ function parseFilter (query) {
       , traverse = false;
     if (traversable[test]) {
       var st = [];
-      for (var i = 0; i < params.length; i++)
-        st.push(parseFilter(params[i]));
       traverse = true;
+      for (var i = 0; i < params.length; i++) {
+        var nq = parseQuery(params[i]);
+        st.push(nq);
+      }
     }
     stack.push({
         fn: fn
@@ -465,19 +460,28 @@ function parseFilter (query) {
  * @param {Object} value for consumption by comparator test
  * @param {Array} stack from `parseFilter`
  * @returns {Boolean} result
+ * @api private
  */
 
 function testFilter (val, stack) {
+  var pass = true;
+  for (var si = 0, sl = stack.length; si < sl; si++) {
+    var filter = stack[si]
+      , el = (filter.path) ? getPathValue(filter.path, val) : val;
+    if (!_testFilter(el, filter.test)) pass = false;
+  }
+  return pass;
+};
+
+function _testFilter (val, stack) {
   var res = true;
   for (var i = 0; i < stack.length; i++) {
     var test = stack[i]
       , params = test.params;
     if (test.traverse) {
       var p = [];
-      for (var ii = 0; ii < params.length; ii++) {
-        var t = params[ii];
-        p.push(testFilter(val, t));
-      }
+      for (var ii = 0; ii < params.length; ii++)
+        p.push(testFilter(val, params[ii]));
       params = p;
     }
     if (test.fn.length == 1) {

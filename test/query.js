@@ -31,6 +31,15 @@ describe('Query', function () {
     Q.stack.should.have.length(1);
     Q.stack[0].test.should.be.instanceof(Array);
     Q.test([0,1,2], { type: 'single' }).should.be.true;
+    Q.test([0,1,2,3], { type: 'single' }).should.be.false;
+  });
+
+  it('should parse a complex nested query', function () {
+    var query = { $or: [ { $size: 3, $all: [ 4 ] }, { $all: [ 1, 2 ] } ] }
+      , Q = filtr(query);
+    Q.stack.should.have.length(1);
+    Q.test([ 2, 3, 4], { type: 'single' }).should.be.true;
+    Q.test([ 1, 2 ], {type: 'single' }).should.be.true;
   });
 
   it('should provide the getPathValue helper', function () {
@@ -99,6 +108,16 @@ describe('Query', function () {
         , Q = filtr(query);
       Q.stack.should.have.length(1);
       Q.test({ hello: true }, { type: 'single' }).should.be.true;
+    });
+
+    it('should assume $eq if no comparator provide - nested', function () {
+      var query = { $or : [ { 'hello': true }, { 'universe': true } ] }
+        , Q = filtr(query);
+      Q.stack.should.have.length(1);
+      Q.test({ hello: true }, { type: 'single' }).should.be.true;
+      Q.test({ universe: true }, { type: 'single' }).should.be.true;
+      Q.test({ hello: false, universe: true }, { type: 'single' }).should.be.true;
+      Q.test({ hello: false, universe: false }, { type: 'single' }).should.be.false;
     });
   });
 

@@ -1,4 +1,12 @@
 
+0.2.2 / 2012-03-08 
+==================
+
+  * added test coverage
+  * browser build
+  * test for nested traversable values
+  * [bug] fixed when traversable has values, not more queries
+
 0.2.1 / 2012-02-25 
 ==================
 

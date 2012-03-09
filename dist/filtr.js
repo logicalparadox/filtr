@@ -71,7 +71,7 @@ function Filtr (query) {
  * Version number
  */
 
-Filtr.version = '0.2.2';
+Filtr.version = '0.2.3';
 
 /**
  * ## .comparators
@@ -439,9 +439,9 @@ function parseFilter (query) {
         if ('string' == typeof p
         ||  'number' == typeof p
         ||  'boolean' == typeof p) {
-          var nq = p;
+          traverse = false
         } else {
-          var nq = parseQuery(params[i]);
+          var nq = parseQuery(p);
         }
         st.push(nq);
       }

@@ -1,4 +1,10 @@
 
+0.2.3 / 2012-03-08 
+==================
+
+  * don't traverse if any params are values, not queries
+  * npm ignore coverage
+
 0.2.2 / 2012-03-08 
 ==================
 

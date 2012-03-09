@@ -42,6 +42,14 @@ describe('Query', function () {
     Q.test([ 1, 2 ], {type: 'single' }).should.be.true;
   });
 
+  it('should support multiple statements', function () {
+    var query = { 'test': 'hello', world: { $in: [ 'universe' ] } }
+      , Q = filtr(query);
+    Q.stack.should.have.length(2);
+    Q.test({ test: 'hello', world: 'universe' }, { type: 'single' }).should.be.true;
+    Q.test({ test: 'hello', world: 'galaxy' }, { type: 'single' }).should.be.false;
+  });
+
   it('should provide the getPathValue helper', function () {
     var obj = { hello: { universe: 'world' }}
       , val = filtr.getPathValue('hello.universe', obj);

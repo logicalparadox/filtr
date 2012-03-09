@@ -435,7 +435,14 @@ function parseFilter (query) {
       var st = [];
       traverse = true;
       for (var i = 0; i < params.length; i++) {
-        var nq = parseQuery(params[i]);
+        var p = params[i];
+        if ('string' == typeof p
+        ||  'number' == typeof p
+        ||  'boolean' == typeof p) {
+          var nq = p;
+        } else {
+          var nq = parseQuery(params[i]);
+        }
         st.push(nq);
       }
     }

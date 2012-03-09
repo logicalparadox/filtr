@@ -121,7 +121,15 @@ describe('Query', function () {
     });
   });
 
-  // TODO: More complicated nesting
-  // TODO: All nesting options.
+  describe('nested path iteration', function () {
+    // TODO: More complicated nesting
+    it('should provide path values to nested travsersables', function () {
+      var query = { 'test': { $or: [ 2, 4, 7 ] } }
+        , Q = filtr(query);
+      Q.stack.should.have.length(1);
+      Q.test({ test: 4 }, { type: 'single' }).should.be.true;
+    });
+  });
 
+  // TODO: All nesting options.
 });

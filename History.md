@@ -1,4 +1,12 @@
 
+0.2.4 / 2012-03-09 
+==================
+
+  * browser build
+  * tests for filling in empty paths on setPathValue
+  * fill in empty paths
+  * another test
+
 0.2.3 / 2012-03-08 
 ==================
 

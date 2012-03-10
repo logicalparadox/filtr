@@ -63,6 +63,18 @@ describe('Query', function () {
       obj.should.eql({ hello: 'universe' });
     });
 
+    it('should allow nested object value to be set', function () {
+      var obj = {};
+      filtr.setPathValue('hello.universe', 'filtr', obj);
+      obj.should.eql({ hello: { universe: 'filtr' }});
+    });
+
+    it('should allow nested array value to be set', function () {
+      var obj = {};
+      filtr.setPathValue('hello.universe[1].filtr', 'galaxy', obj);
+      obj.should.eql({ hello: { universe: [ , { filtr: 'galaxy' } ] }});
+    });
+
     it('should allow value to be REset in simple object', function () {
       var obj = { hello: 'world' };
       filtr.setPathValue('hello', 'universe', obj);
@@ -126,16 +138,6 @@ describe('Query', function () {
       Q.test({ universe: true }, { type: 'single' }).should.be.true;
       Q.test({ hello: false, universe: true }, { type: 'single' }).should.be.true;
       Q.test({ hello: false, universe: false }, { type: 'single' }).should.be.false;
-    });
-  });
-
-  describe('nested path iteration', function () {
-    // TODO: More complicated nesting
-    it('should provide path values to nested travsersables', function () {
-      var query = { 'test': { $or: [ 2, 4, 7 ] } }
-        , Q = filtr(query);
-      Q.stack.should.have.length(1);
-      Q.test({ test: 4 }, { type: 'single' }).should.be.true;
     });
   });
 

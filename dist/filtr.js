@@ -249,7 +249,7 @@ function parsePath (path) {
     var re = /([A-Za-z0-9]+)\[(\d+)\]$/
       , mArr = re.exec(value)
       , val;
-    if (mArr) val = { p: mArr[1], i: mArr[2] };
+    if (mArr) val = { p: mArr[1], i: parseFloat(mArr[2]) };
     return val || value;
   });
 };
@@ -304,7 +304,7 @@ function setPathValue (parsed, val, obj) {
   var tmp = obj;
   for (var i = 0, l = parsed.length; i < l; i++) {
     var part = parsed[i];
-    if (tmp) {
+    if ('undefined' !== typeof tmp) {
       if (i == (l - 1)) {
         if ('object' === typeof part && tmp[part.p]) {
           tmp[part.p][part.i] = val;
@@ -314,6 +314,14 @@ function setPathValue (parsed, val, obj) {
       } else {
         if ('object' === typeof part && tmp[part.p]) {
           tmp = tmp[part.p][part.i];
+        } else if ('object' === typeof part && !tmp[part.p] ) {
+          tmp[part.p] = []; //new Array(part.i + 1);
+          if ('object' === typeof parsed[i + 1]) tmp[part.p][part.i] = [];
+          else tmp[part.p][part.i] = {};
+          tmp = tmp[part.p][part.i];
+        } else if (!tmp[part]) {
+          tmp[part] = {};
+          tmp = tmp[part];
         } else {
           tmp = tmp[part];
         }

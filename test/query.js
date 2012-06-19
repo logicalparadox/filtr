@@ -50,10 +50,36 @@ describe('Query', function () {
     Q.test({ test: 'hello', world: 'galaxy' }, { type: 'single' }).should.be.false;
   });
 
-  it('should provide the getPathValue helper', function () {
-    var obj = { hello: { universe: 'world' }}
-      , val = filtr.getPathValue('hello.universe', obj);
-    val.should.equal('world');
+  describe('getPathValue', function () {
+    it('can get value for simple nested object', function () {
+      var obj = { hello: { universe: 'world' }}
+        , val = filtr.getPathValue('hello.universe', obj);
+      val.should.equal('world');
+    });
+
+    it('can get value for simple array', function () {
+      var obj = { hello: [ 'zero', 'one' ] }
+        , val = filtr.getPathValue('hello[1]', obj);
+      val.should.equal('one');
+    });
+
+    it('can get value of nested array', function () {
+      var obj = { hello: [ 'zero', [ 'a', 'b' ] ] }
+        , val = filtr.getPathValue('hello[1][0]', obj);
+      val.should.equal('a');
+    });
+
+    it('can get value of array only', function () {
+      var obj = [ 'zero', 'one' ]
+        , val = filtr.getPathValue('[1]', obj);
+      val.should.equal('one');
+    });
+
+    it('can get value of array only nested', function () {
+      var obj = [ 'zero', [ 'a', 'b' ] ]
+        , val = filtr.getPathValue('[1][1]', obj);
+      val.should.equal('b');
+    });
   });
 
   describe('setPathValue', function () {

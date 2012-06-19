@@ -1,4 +1,10 @@
 
+0.3.0 / 2012-06-18 
+==================
+
+  * browser build
+  * permit get/set path value of nested arrays
+
 0.2.4 / 2012-03-09 
 ==================
 

@@ -71,7 +71,7 @@ function Filtr (query) {
  * Version number
  */
 
-Filtr.version = '0.2.4';
+Filtr.version = '0.3.0';
 
 /**
  * ## .comparators

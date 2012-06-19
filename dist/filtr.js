@@ -244,13 +244,13 @@ Filtr.setPathValue = function (path, val, obj) {
  */
 
 function parsePath (path) {
-  var parts = path.split('.').filter(Boolean);
+  var str = path.replace(/\[/g, '.[')
+    , parts = str.match(/(\\\.|[^.]+?)+/g);
   return parts.map(function (value) {
-    var re = /([A-Za-z0-9]+)\[(\d+)\]$/
+    var re = /\[(\d+)\]$/
       , mArr = re.exec(value)
-      , val;
-    if (mArr) val = { p: mArr[1], i: parseFloat(mArr[2]) };
-    return val || value;
+    if (mArr) return { i: parseFloat(mArr[1]) };
+    else return { p: value };
   });
 };
 
@@ -273,11 +273,10 @@ function getPathValue (parsed, obj) {
   for (var i = 0, l = parsed.length; i < l; i++) {
     var part = parsed[i];
     if (tmp) {
-      if ('object' === typeof part && tmp[part.p]) {
-        tmp = tmp[part.p][part.i];
-      } else {
-        tmp = tmp[part];
-      }
+      if ('undefined' !== typeof part.p)
+        tmp = tmp[part.p];
+      else if ('undefined' !== typeof part.i)
+        tmp = tmp[part.i];
       if (i == (l - 1)) res = tmp;
     } else {
       res = undefined;
@@ -306,34 +305,32 @@ function setPathValue (parsed, val, obj) {
     var part = parsed[i];
     if ('undefined' !== typeof tmp) {
       if (i == (l - 1)) {
-        if ('object' === typeof part && tmp[part.p]) {
-          tmp[part.p][part.i] = val;
-        } else {
-          tmp[part] = val;
-        }
+        if ('undefined' !== typeof part.p)
+          tmp[part.p] = val;
+        else if ('undefined' !== typeof part.i)
+          tmp[part.i] = val;
       } else {
-        if ('object' === typeof part && tmp[part.p]) {
-          tmp = tmp[part.p][part.i];
-        } else if ('object' === typeof part && !tmp[part.p] ) {
-          tmp[part.p] = []; //new Array(part.i + 1);
-          if ('object' === typeof parsed[i + 1]) tmp[part.p][part.i] = [];
-          else tmp[part.p][part.i] = {};
-          tmp = tmp[part.p][part.i];
-        } else if (!tmp[part]) {
-          tmp[part] = {};
-          tmp = tmp[part];
-        } else {
-          tmp = tmp[part];
+        if ('undefined' !== typeof part.p && tmp[part.p])
+          tmp = tmp[part.p];
+        else if ('undefined' !== typeof part.i && tmp[part.i])
+          tmp = tmp[part.i];
+        else {
+          var next = parsed[i + 1];
+          if ('undefined' !== typeof part.p) {
+            tmp[part.p] = {};
+            tmp = tmp[part.p];
+          } else if ('undefined' !== typeof part.i) {
+            tmp[part.i] = [];
+            tmp = tmp[part.i]
+          }
         }
       }
     } else {
-      if (i == (l - 1)) {
-        tmp = val;
-      } else if ('object' === typeof part) {
-        tmp = [];
-      } else {
+      if (i == (l - 1)) tmp = val;
+      else if ('undefined' !== typeof part.p)
         tmp = {};
-      }
+      else if ('undefined' !== typeof part.i)
+        tmp = [];
     }
   }
 };

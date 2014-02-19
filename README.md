@@ -28,7 +28,7 @@ Filtr is still in early development so expect this list to grow.
 
 ##### Expansive Query Language
 
-* Comparators: `$gt`, `$gte`, `$lt`, `$lte`, `$all`, `$exists`, `$mod`, `$eq`, `$ne`, `$in`, `$nin`, `$size`
+* Comparators: `$gt`, `$gte`, `$lt`, `$lte`, `$all`, `$exists`, `$mod`, `$eq`, `$ne`, `$in`, `$nin`, `$size`, `$regex`
 * Traversables: `$or`, `$nor`, `$and`
 
 ##### Data Helpers

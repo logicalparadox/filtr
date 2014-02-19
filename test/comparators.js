@@ -31,6 +31,11 @@ describe('comparator', function () {
     comparator.$lte(1,1).should.be.true;
     comparator.$lte(1,0).should.be.false;
   });
+  
+  it('$regex should work with string regex pattern', function () {
+    comparator.$regex('hello world', '^world').should.be.false;
+    comparator.$regex('hello world', 'world$').should.be.true;      
+  });
 
   it('$all should work', function () {
     comparator.$all([1,2],[1,2]).should.be.true;

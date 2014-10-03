@@ -98,7 +98,9 @@ describe('Query', function () {
     it('should allow nested array value to be set', function () {
       var obj = {};
       filtr.setPathValue('hello.universe[1].filtr', 'galaxy', obj);
-      obj.should.eql({ hello: { universe: [ , { filtr: 'galaxy' } ] }});
+      var expected = { hello: { universe: { '1': [] } } };
+      expected.hello.universe[1].filtr = 'galaxy';
+      obj.should.eql(expected);
     });
 
     it('should allow value to be REset in simple object', function () {

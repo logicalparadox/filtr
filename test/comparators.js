@@ -103,4 +103,33 @@ describe('comparator', function () {
     comparator.$and([ t1, t2 ]).should.be.true;
     comparator.$and([ t1, t3 ]).should.be.false;
   });
+
+  it('$type should work', function () {
+    var number = 5;
+    var string = 'foo bar';
+    var array = [];
+    var obj = {};
+    var date = new Date();
+    var regex = new RegExp();
+
+
+    comparator.$type(number, 1).should.be.true;
+    comparator.$type(string, 2).should.be.true;
+    comparator.$type(array, 4).should.be.true;
+    comparator.$type(obj, 3).should.be.true;
+    comparator.$type(date, 9).should.be.true;
+    comparator.$type(regex, 11).should.be.true;
+
+    // Aliased
+    comparator.$type(number, 'double').should.be.true;
+    comparator.$type(string, 'string').should.be.true;
+    comparator.$type(array, 'array').should.be.true;
+    comparator.$type(obj, 'object').should.be.true;
+    comparator.$type(date, 'date').should.be.true;
+    comparator.$type(regex, 'regex').should.be.true;
+
+    comparator.$type(date, 'object').should.be.false;
+    comparator.$type(regex, 'object').should.be.false;
+    comparator.$type(array, 'object').should.be.false;
+  })
 });
